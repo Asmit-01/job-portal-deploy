@@ -1,0 +1,43 @@
+{% load static %}{% block body %} {% include 'candidate_nav.html' %}
+<center style="margin: 50px">
+  <table class="ui selectable celled table">
+    <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Salary</th>
+        <th>Experience</th>
+        <th>End Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>{{ job.title }}</td>
+        <td>{{ job.company }}</td>
+        <td>{{ job.location }}</td>
+        <td>{{ job.salary }}</td>
+        <td>{{ job.experience }}</td>
+        <td>{{ job.end_date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<h4 style="margin-left: 50px; margin-right: 50px">Skills Required:</h4>
+<p style="margin-left: 50px; margin-right: 50px">{{ job.skills }}</p>
+
+<h4 style="margin-left: 50px">Description:</h4>
+<p style="margin-left: 50px; margin-right: 50px">{{ job.description }}</p>
+
+<center>
+  <a
+    href="{% url 'apply_for_job' job.id %}"
+    class="ui button btn"
+    style="margin-top: 20px"
+    >Apply</a
+  >
+</center>
+
+{% endblock body %}

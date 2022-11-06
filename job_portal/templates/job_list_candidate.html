@@ -1,0 +1,40 @@
+{% load static %}{% block body %} {% include 'candidate_nav.html' %}
+
+<center style="margin: 50px">
+  <b style="font-size: 30px">Jobs</b>
+
+  <table class="ui selectable celled table" id="example">
+    <thead>
+      <tr>
+        <th>S.no</th>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>End Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i in job %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.title }}</td>
+        <td>{{ i.company }}</td>
+        <td>{{ i.location }}</td>
+        <td>{{ i.end_date }}</td>
+
+        {% if i.id in li %}
+        <td>Applied</td>
+        {% else %}
+        <td>
+          <a href="{% url 'job_detail' i.id %}" class="ui button btn">Apply</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</center>
+
+{% endblock body %}

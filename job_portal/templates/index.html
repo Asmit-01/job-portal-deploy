@@ -1,0 +1,84 @@
+{% load static%} {% block body %} {% include 'navigation.html'%}
+
+<div class="banner">
+  <img src="{% static 'images/header-img.jpeg' %}" />
+</div>
+
+<div class="ui container">
+  <h1 style="margin: 20px">Popular Companies</h1>
+  <div class="company">
+    <div>
+      <a href="https://www.amazon.jobs/en/" target="_blank">
+        <i class="amazon massive icon"></i>
+        <h2>Amazon</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://careers.google.com/jobs/results/" target="_blank">
+        <i class="google massive icon"></i>
+        <h2>Google</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://www.apple.com/careers/in/" target="_blank">
+        <i class="apple massive icon"></i>
+        <h2>Apple</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://www.metacareers.com/" target="_blank">
+        <i class="facebook massive icon"></i>
+        <h2>Facebook</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://www.uber.com/in/en/careers/" target="_blank">
+        <i class="uber massive icon"></i>
+        <h2>Uber</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://careers.pypl.com/home/" target="_blank">
+        <i class="paypal massive icon"></i>
+        <h2>Paypal</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://slack.com/intl/en-in/careers" target="_blank">
+        <i class="slack massive icon"></i>
+        <h2>Slack</h2>
+      </a>
+    </div>
+
+    <div>
+      <a
+        href="https://www.accusoft.com/company/working-at-accusoft/open-positions/"
+        target="_blank"
+      >
+        <i class="accusoft massive icon"></i>
+        <h2>Accusoft</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://careers.microsoft.com/us/en" target="_blank">
+        <i class="microsoft massive icon"></i>
+        <h2>Microsoft</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://cuttlefish.com/jobs" target="_blank">
+        <i class="cuttlefish massive icon"></i>
+        <h2>Cuttlefish</h2>
+      </a>
+    </div>
+  </div>
+</div>
+{% include 'footer.html'%} {% endblock %}

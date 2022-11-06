@@ -1,0 +1,75 @@
+{% load static %} {% block body %} {% include 'recruiter_nav.html' %}
+
+<div class="ui container login">
+  <center><h1 style="margin-bottom: 20px">Post Jobs</h1></center>
+  <form class="ui form" name="postjob" method="POST">
+    {% csrf_token %}
+    <div class="field">
+      <label for="title">Job Title : </label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Enter Job Title"
+      />
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label for="location">Location : </label>
+        <input
+          type="text"
+          name="location"
+          id="location"
+          placeholder="Enter Location"
+        />
+      </div>
+      <div class="field">
+        <label for="salary">Salary (CTC) : </label>
+        <input type="text" name="salary" id="salary" required />
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label for="end_date">End Date : </label>
+        <input type="date" name="end_date" id="end_date" required />
+      </div>
+      <div class="field">
+        <label for="experience">Experience (In Years) : </label>
+        <input type="text" name="experience" id="experience" required />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="skills">Skills : </label>
+      <input
+        type="text"
+        name="skills"
+        id="skills"
+        placeholder="Skills Required"
+      />
+    </div>
+
+    <div class="field">
+      <label for="description">Description : </label>
+      <textarea name="description" id="description"></textarea>
+    </div>
+
+    <div style="display: flex; justify-content: space-around">
+      <button class="btn" type="submit" value="submit">Post</button>
+      <button class="btn" type="reset">Clear</button>
+    </div>
+  </form>
+</div>
+
+{% include 'footer.html'%} {% if error == "no" %}
+<script>
+  alert("Job Posted Successfully");
+  window.location=('{% url 'job_list' %}')
+</script>
+{% endif %} {% if error == "yes" %}
+<script>
+  alert("Something went wrong,Try again!");
+</script>
+{% endif %} {%endblock body %}

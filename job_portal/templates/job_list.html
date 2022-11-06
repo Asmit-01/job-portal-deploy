@@ -1,0 +1,47 @@
+{% load static %}{% block body %} {% include 'recruiter_nav.html' %}
+
+<center style="margin: 50px">
+  <b style="font-size: 30px">Jobs Posted by You</b>
+
+  <table class="ui selectable celled table" id="example">
+    <thead>
+      <tr>
+        <th>S.no</th>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Salary (CTC)</th>
+        <th>Experience</th>
+        <th>Skills</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i in data %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.title }}</td>
+        <td>{{ i.company }}</td>
+        <td>{{ i.location }}</td>
+        <td>{{ i.salary }}</td>
+        <td>{{ i.experience }}</td>
+        <td>{{ i.skills }}</td>
+        <td>{{ i.description }}</td>
+        <td style="display: flex; justify-content: space-around">
+          <a class="ui button btn" href="{% url 'edit_job' i.id %}"> Edit </a>
+          <a
+            href="{% url 'delete_job' i.id %}"
+            class="ui button btn"
+            onclick="return confirm('Do you really want to delete this job?')"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</center>
+
+{% endblock body %}
