@@ -43,6 +43,7 @@ class applied(models.Model):
     candidate=models.ForeignKey(userdetails,on_delete=models.CASCADE)
     resume=models.FileField(null=True)
     applied_date=models.DateField()
+    status = models.CharField(max_length=10,null=True)
      
     def _str_(self):
         return self.id

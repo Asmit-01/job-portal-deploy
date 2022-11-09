@@ -24,8 +24,10 @@
         <td>{{ i.location }}</td>
         <td>{{ i.end_date }}</td>
 
-        {% if i.id in li %}
+        {% if i.id in li1 %}
         <td>Applied</td>
+        {% elif i.id in li2 %}
+        <td>Rejected</td>
         {% else %}
         <td>
           <a href="{% url 'job_detail' i.id %}" class="ui button btn">Apply</a>

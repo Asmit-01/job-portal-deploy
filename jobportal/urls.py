@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from job_portal.views import *
 from django.conf.urls.static import static
+from django.urls import path
 
 from django.views.static import serve
 # from django.conf.urls import url
@@ -32,7 +33,9 @@ urlpatterns = [
     path('candidate_sign_up',candidate_sign_up,name="candidate_sign_up"),
     path('recruiter_signup',recruiter_signup,name="recruiter_signup"),
     path('candidate_home',candidate_home,name="candidate_home"),
+    path('candidate_update',candidate_update,name="candidate_update"),
     path('recruiter_home',recruiter_home,name="recruiter_home"),
+    path('recruiter_update',recruiter_update,name="recruiter_update"),
     path('admin_home',admin_home,name="admin_home"),
     path('view_candidates',view_candidates,name="view_candidates"),
     path('view_recruiters',view_recruiters,name="view_recruiters"),
@@ -51,8 +54,13 @@ urlpatterns = [
     path('job_detail/<int:pid>',job_detail,name="job_detail"),
     path('apply_for_job/<int:pid>',apply_for_job,name="apply_for_job"),
     path('applied_candidates',applied_candidates,name="applied_candidates"),
+    path('reject_candidate/<int:xid>',reject_candidate,name="reject_candidate"),
     path('Logout',Logout,name="Logout"),
+    path('forgot_password_candidate', forgot_password_candidate, name='forgot_password_candidate'),
+    path('forgot_password_recruiter', forgot_password_recruiter, name='forgot_password_recruiter'),
     # url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
-    # url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+    # url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    
+ 
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

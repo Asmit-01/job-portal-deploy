@@ -1,44 +1,53 @@
 <html>
-    <head>
-        <title>Job Portal</title>
+  <head>
+    <title>Job Portal</title>
 
-        <meta charset="utf-8">
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'style.css'%}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
+    <meta charset="utf-8" />
+    {% load static %}
 
-    <body>
-        <div class="contain">
-            
-                <div class="col1">
-                    <div class="logo">
-                        <span><i class="briefcase icon"></i></span>
-                        <span>Job Portal</span>
-                    </div>
-                </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("qep0v5-YXHUKYI2qQ");
+      })();
+    </script>
 
-                {% comment %} <div class="col2">
-                    <h2><span>Job</span> 
-                        <span style="color: yellow">Portal<span/>
-                    </h2>
-                </div> {% endcomment %}
-                <div class="navbar">
-                    <ul>
-                        <li><a href="{% url 'index' %}">Home</a></li>
+    <link rel="stylesheet" href="{% static 'style.css'%}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-                        <li><a href="{% url 'latest_jobs' %}">Latest Jobs</a></li>
-
-                        <li><a href="{% url 'candidate_login' %}">Candidate Login</a></li>
-
-                        <li><a href="{% url 'recruiter_login' %}">Recruiter Login</a></li>
-
-                        <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
-
-                    </ul>
-                </div>
-                <div style="width: 200px"></div>
-                
+  <body>
+    <div class="contain">
+      <div class="col1">
+        <div class="logo">
+          <span><i class="briefcase icon"></i></span>
+          <span>Job Portal</span>
         </div>
-    </body>
+      </div>
+
+      <div class="navbar">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+
+          <li><a href="{% url 'latest_jobs' %}">Latest Jobs</a></li>
+
+          <li><a href="{% url 'candidate_login' %}">Candidate Login</a></li>
+
+          <li><a href="{% url 'recruiter_login' %}">Recruiter Login</a></li>
+
+          <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+        </ul>
+      </div>
+      <div style="width: 200px"></div>
+    </div>
+  </body>
 </html>

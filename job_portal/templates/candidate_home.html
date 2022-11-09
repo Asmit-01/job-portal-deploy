@@ -1,119 +1,84 @@
 {% load static%} {% block body %} {% include 'candidate_nav.html'%}
 
-<div class="ui container login">
-  <center><h1 style="margin-bottom: 20px">Candidate Profile</h1></center>
-  <form class="ui form" name="signup" method="POST">
-    {% csrf_token %}
-    <div class="two fields">
-      <div class="field">
-        <label for="fname">FirstName : </label>
-        <input
-          type="text"
-          name="fname"
-          id="fname"
-          value="{{candidate.user.first_name}}"
-        />
-      </div>
-      <div class="field">
-        <label for="lname">LastName : </label>
-        <input
-          type="text"
-          name="lname"
-          id="lname"
-          value="{{candidate.user.last_name}}"
-        />
-      </div>
-    </div>
-
-    {% if candidate.gender == "Male" %}
-    <div class="inline field">
-      <label for="gender">Gender : </label>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          border: 2px solid yellow;
-          border-radius: 5px;
-        "
-        class="radio"
-      >
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender" value="Male" id="male" checked />
-            <label>Male</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender" id="female" />
-            <label>Female</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% else %}
-    <div class="inline field">
-      <label for="gender">Gender : </label>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          border: 2px solid yellow;
-          border-radius: 5px;
-        "
-        class="radio"
-      >
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender" value="Male" id="male" />
-            <label>Male</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="gender" id="female" checked />
-            <label>Female</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    <div class="field">
-      <label for="mobile">Mobile : </label>
-      <input
-        type="text"
-        name="mobile"
-        id="mobile"
-        value="{{candidate.mobile}}"
-      />
-    </div>
-    <div class="field">
-      <label for="email">Email *: </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        value="{{request.user.email}}"
-        readonly
-      />
-    </div>
-
-    <div style="display: flex; justify-content: space-around">
-      <button class="btn" type="submit" value="submit">Update Details</button>
-    </div>
-  </form>
+<div class="banner">
+  <img src="{% static 'images/job-search-in-newspaper-vector.jpg' %}" />
 </div>
 
-{% include 'footer.html'%} {% if error == "no" %}
-<script>
-  alert("Details Updated");
-  window.location=('{% url 'candidate_home' %}')
-</script>
-{% endif %} {% if error == "yes" %}
-<script>
-  alert("Something went wrong,Try again!");
-</script>
-{% endif %} {% endblock %}
+<div class="ui container">
+  <h1 style="margin: 20px">Popular Companies</h1>
+  <div class="company">
+    <div>
+      <a href="https://www.amazon.jobs/en/" target="_blank">
+        <i class="amazon massive icon"></i>
+        <h2>Amazon</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://careers.google.com/jobs/results/" target="_blank">
+        <i class="google massive icon"></i>
+        <h2>Google</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://www.apple.com/careers/in/" target="_blank">
+        <i class="apple massive icon"></i>
+        <h2>Apple</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://www.metacareers.com/" target="_blank">
+        <i class="facebook massive icon"></i>
+        <h2>Facebook</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://www.uber.com/in/en/careers/" target="_blank">
+        <i class="uber massive icon"></i>
+        <h2>Uber</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://careers.pypl.com/home/" target="_blank">
+        <i class="paypal massive icon"></i>
+        <h2>Paypal</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://slack.com/intl/en-in/careers" target="_blank">
+        <i class="slack massive icon"></i>
+        <h2>Slack</h2>
+      </a>
+    </div>
+
+    <div>
+      <a
+        href="https://www.accusoft.com/company/working-at-accusoft/open-positions/"
+        target="_blank"
+      >
+        <i class="accusoft massive icon"></i>
+        <h2>Accusoft</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://careers.microsoft.com/us/en" target="_blank">
+        <i class="microsoft massive icon"></i>
+        <h2>Microsoft</h2>
+      </a>
+    </div>
+
+    <div>
+      <a href="https://cuttlefish.com/jobs" target="_blank">
+        <i class="cuttlefish massive icon"></i>
+        <h2>Cuttlefish</h2>
+      </a>
+    </div>
+  </div>
+</div>
+{% include 'footer.html'%} {% endblock %}

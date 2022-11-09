@@ -31,6 +31,12 @@
         <td>{{ i.applied_date }}</td>
         <td>
           <a href="{{ i.resume.url }}" download>Download Resume</a>
+          <a
+            href="{% url 'reject_candidate' i.id %}"
+            class="ui button btn"
+            onclick="return confirm('Do you really want to reject this candidate?')"
+            >Reject</a
+          >
         </td>
       </tr>
       {% endif %} {% endfor %}

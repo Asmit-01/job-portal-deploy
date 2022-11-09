@@ -7,7 +7,8 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from datetime import date
-import os
+from django.core.mail import send_mail
+import string,random
 
 # Create your views here.
 def index(request):
@@ -122,7 +123,7 @@ def Logout(request):
     return redirect('index')
 
 
-def candidate_home(request):
+def candidate_update(request):
     if not request.user.is_authenticated:
         return redirect('candidate_login')
     
@@ -147,9 +148,21 @@ def candidate_home(request):
         except:
             error="yes"
     d = {'candidate':candidate,'error': error}
-    return render(request,'candidate_home.html',d)
+    return render(request,'candidate_update.html',d)
+
+
+def candidate_home(request):
+    if not request.user.is_authenticated:
+        return redirect('candidate_login')
+    return render(request,'candidate_home.html')
 
 def recruiter_home(request):
+    if not request.user.is_authenticated:
+        return redirect('recruiter_login')
+    return render(request,'recruiter_home.html')
+
+
+def recruiter_update(request):
     if not request.user.is_authenticated:
         return redirect('recruiter_login')
     
@@ -172,7 +185,7 @@ def recruiter_home(request):
         except:
             error="yes"
     d = {'recruiter':recruiter,'error': error}
-    return render(request,'recruiter_home.html',d)
+    return render(request,'recruiter_update.html',d)
 
 def admin_home(request):
     if not request.user.is_authenticated:
@@ -196,6 +209,14 @@ def delete_candidate(request,pid):
     candidate = User.objects.get(id=pid)
     candidate.delete()
     return redirect('view_candidates')
+
+def reject_candidate(request,xid):
+    if not request.user.is_authenticated:
+        return redirect('recruiter_login')
+    candidate = applied.objects.get(id=xid)
+    candidate.status='Rejected'
+    candidate.save()
+    return redirect('applied_candidates')
 
 def pendingrequests(request):
     if not request.user.is_authenticated:
@@ -331,11 +352,15 @@ def job_list_candidate(request):
     job = jobs.objects.all()
     data=applied.objects.filter(candidate=candidate1)
     
-    li = []
+    li1 = set()
+    li2 = set()
     for i in data:
-        li.append(i.job.id)
+        if i.status == 'Applied':
+            li1.add(i.job.id)
+        elif i.status == 'Rejected':
+            li2.add(i.job.id)
         
-    dic = {'job':job,'li':li}
+    dic = {'job':job,'li1':li1,'li2':li2}
     return render(request,'job_list_candidate.html',dic)
 
 def latest_jobs(request):
@@ -393,6 +418,8 @@ def job_detail(request,pid):
     d = {'job':data}
     return render(request,'job_detail.html',d)
 
+
+
 def apply_for_job(request,pid):
     if not request.user.is_authenticated:
         return redirect('candidate_login')
@@ -408,7 +435,7 @@ def apply_for_job(request,pid):
     else:
         if request.method == 'POST':
             r = request.FILES['resume']
-            applied.objects.create(resume=r,applied_date=date1,candidate=candidate,job=job)
+            applied.objects.create(resume=r,applied_date=date1,candidate=candidate,job=job,status='Applied')
             error="ok"
     d = {'error':error,'candidate':candidate}
     return render(request,'apply_for_job.html',d)
@@ -418,7 +445,79 @@ def applied_candidates(request):
     if not request.user.is_authenticated:
         return redirect('recruiter_login')
     
-    data = applied.objects.all()
+    data = applied.objects.filter(status='Applied')
     dic = {'data':data}
     return render(request,'applied_candidates.html',dic)
 
+
+def forgot_password_candidate(request):
+    error,p="",""
+    if request.method=='POST':
+        e = request.POST['email']
+        li = set()
+        data = User.objects.all()
+        for i in data:
+            li.add(i.username)
+        
+        if e in li:
+            u = User.objects.get(username=e)
+            p= ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) 
+            u.set_password(p)
+            print(p)
+            print(u.username)
+            u.save()
+            
+            subject = 'OTP for login'
+            message = f'''Hi {u.username} ,
+
+Your one-time password is  {p}.
+
+Best wishes,
+Job-portal team'''
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [e]
+            print(recipient_list)
+            send_mail( subject, message, email_from, recipient_list)
+            error="no" 
+        else:
+            error="yes"
+     
+    dic = {'error': error}
+    return render(request,'forgot_password_candidate.html',dic)
+
+
+def forgot_password_recruiter(request):
+    error,p="",""
+    if request.method=='POST':
+        e = request.POST['email']
+        li = set()
+        data = User.objects.all()
+        for i in data:
+            li.add(i.username)
+        
+        if e in li:
+            u = User.objects.get(username=e)
+            p= ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) 
+            u.set_password(p)
+            print(p)
+            print(u.username)
+            u.save()
+            
+            subject = 'OTP for login'
+            message = f'''Hi {u.username} ,
+
+Your one-time password is  {p}.
+
+Best wishes,
+Job-portal team'''
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [e]
+            print(recipient_list)
+            send_mail( subject, message, email_from, recipient_list)
+            error="no" 
+        else:
+            error="yes"
+     
+    dic = {'error': error}
+    return render(request,'forgot_password_recruiter.html',dic)
+    
