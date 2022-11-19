@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-odra&v%*-9i2xs1@y1voa&auu6wnyfjn&_ak)8)55jbx@6q@15
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com','asmit-job-portal.azurewebsites.net']
 
 
 # Application definition
