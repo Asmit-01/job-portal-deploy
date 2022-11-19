@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'Asmit-job-portal'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E6CDE636C1744839FD08762AD5D413D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5A0614C5AB884BF1BCD22E405821F209 }}
